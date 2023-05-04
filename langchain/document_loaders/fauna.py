@@ -40,4 +40,6 @@ class FaunaLoader(BaseLoader):
                         documents.append(document)
                 if page.after is None:
                     break
+                result: QuerySuccess = client.query()
+                page: Page = result.data
             return documents
