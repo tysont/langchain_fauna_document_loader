@@ -1,5 +1,6 @@
 from typing import List, Optional
 from langchain.docstore.document import Document
+
 from langchain.document_loaders.base import BaseLoader
 
 
@@ -27,12 +28,12 @@ class FaunaLoader(BaseLoader):
 
         with Client() as client:
             documents = []
-            response : QuerySuccess = client.query(fql(self.query))
+            response: QuerySuccess = client.query(fql(self.query))
             page: Page = response.data
             while True:
                 for result in page:
                     if result is not None:
-                        document : Document = Document()
+                        document: Document = Document()
                         document.page_content = result[self.page_content_field]
                         document.metadata = dict()
                         for metadata_field in self.metadata_fields:
